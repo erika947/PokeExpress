@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/pokemon', (req, res) => {
     res.render('Index', {pokemon: pokemon})
-})
+})// Need to capitalize the first letter of their names
 
 app.listen(port, () => {
     console.log(`*** Listening on http://localhost:${port} ***`)
