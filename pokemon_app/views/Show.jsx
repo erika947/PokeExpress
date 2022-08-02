@@ -11,7 +11,7 @@ const myStyle = {
          return (
              <div>
            <h1> Gotta Catch 'Em All!' </h1>
-            <h2> Whose That Pokémon?!... It's {pokemon.name}
+            <h2> Whose That Pokémon?!... It's {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
              </h2>
              <img src={pokemon.img + '.jpg'}></img>
              <nav>
