@@ -15,8 +15,10 @@ app.get('/pokemon', (req, res) => {
     res.render('Index', {pokemon: pokemon})
 })// Need to capitalize the first letter of their names
 
-app.get('/pokemon/:id', (req, res) => {
-    res.send(req.params.id)
+app.get('/pokemon/:indexOfPokemonArray', (req, res) => {
+    res.render('Show', {
+        pokemon: pokemon[req.params.indexOfPokemonArray] 
+    })
 })
 
 app.listen(port, () => {

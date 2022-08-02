@@ -8,7 +8,7 @@ const myStyle = {
 
     class Index extends React.Component {
       render() {
-        //   const { Index } = this.props;
+        
           return (
                   <div style ={myStyle}>
                       <h1>See All Pokemon</h1>
