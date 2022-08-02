@@ -14,8 +14,8 @@ const myStyle = {
                       <h1>See All Pokemon</h1>
                       <ul>
                         {pokemon.map((pokemon,i) => {return(
-                                  <li class="capitalize-me" >                              
-                                      <a href={`/pokemon${i}`}>
+                                  <li >                              
+                                      <a href={`/pokemon/${i}`}>
                                           {pokemon.name}
                                       </a>                                  
                                   </li>
