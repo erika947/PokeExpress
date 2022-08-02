@@ -11,9 +11,9 @@ const myStyle = {
          return (
              <div>
            <h1> Gotta Catch 'Em All!' </h1>
-            <h2> Whose That Pokémon?!... {pokemon.name} is
+            <h2> Whose That Pokémon?!... It's {pokemon.name}
              </h2>
-             <img src="pokemon"></img>
+             <img src={pokemon.img + '.jpg'}></img>
              <nav>
      <a href="/pokemon/">Pokedex Menu</a>
  </nav>
