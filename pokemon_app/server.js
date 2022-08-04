@@ -1,23 +1,36 @@
 const express = require('express');
-const mongoose = require('mongoose')
-
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 3003;
-
 const Pokemon = require('./models/pokemon')
+const methodOverride = require('method-override')
+const mongoose = require('mongoose');
+// const { application } = require('express');
+const pokemonData = require('./utilities/pokemonData')
+
+//DB Connection
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once("open", () => {
     console.log("connected to mongo");
   });
-   
+
 
 //middleware
 app.use(express.urlencoded({extended:true}))
+app.use(methodOverride('_method'))
 
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+
 //Routes:
+
+// Seed route
+app.get('/pokemon/seed', (req, res) => {
+    // Comment out the line below if you don't want to delete your whole entire collection
+    // Pokemon.deleteMany({}) -> not working for right now
+    // Create a list of pokemon into our database
+    Pokemon.create(pokemonData)
+})
 
 //index:
 app.get('/', (req, res) => {
@@ -41,6 +54,20 @@ app.get('/pokemon/:id', (req, res) => {
     })
 })
 
+app.get('/pokemon/:id/edit', (req, res) => {
+    Pokemon.findById(req.params.id, (error, foundPokemon) => {
+        if(!error) {
+            res.render('Edit',{
+                pokemon: foundPokemon
+            })
+        } else {
+            res.send({
+                message: error.message
+            })
+        }
+    })
+    
+})
 
 //Create:
 
@@ -50,6 +77,23 @@ app.post('/pokemon/', (req, res)=>{
         res.redirect(/pokemon/);
     });
 });
+
+//update route
+app.put('/pokemon/:id', (req, res) => {
+    Pokemon.findByIdAndUpdate(req.params.id, req.body, {
+        new: true
+    }, (error, pokemon) => {
+        res.redirect(`/pokemon/${req.params.id}`)
+    })
+})
+
+//delete route
+app.delete('/pokemon/:id', (req, res) => {
+    console.log('we are deleting')
+    Pokemon.findByIdAndRemove(req.params.id, (err, data) => {
+        res.redirect('/pokemon')
+    })
+})
 
 app.listen(port, () => {
     console.log(`*** Listening on http://localhost:${port} ***`)

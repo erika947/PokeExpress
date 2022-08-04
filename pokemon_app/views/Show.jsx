@@ -13,9 +13,10 @@ const myStyle = {
            <h1> Gotta Catch 'Em All!' </h1>
             <h2> Whose That Pokémon?!... It's {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
              </h2>
-             <img src={pokemon.image /*+ '.jpg' when link is missing this at the end*/}></img>  
+             <img src={pokemon.image + '.jpg'}></img>  
              <nav>
-     <a href="/pokemon/">Pokedex Menu</a>
+     <a href="/pokemon/">Pokedex Menu</a> <br/>
+     <a href="/pokemon/new">Create New Pokemon</a>
  </nav>
              </div>
           );
