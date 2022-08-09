@@ -25,12 +25,12 @@ app.engine('jsx', require('express-react-views').createEngine())
 //Routes:
 
 // Seed route
-app.get('/pokemon/seed', (req, res) => {
-    // Comment out the line below if you don't want to delete your whole entire collection
-    // Pokemon.deleteMany({}) -> not working for right now
-    // Create a list of pokemon into our database
-    Pokemon.create(pokemonData)
-})
+app.get('/pokemon/seed', async (req, res) => {
+    await Pokemon.deleteMany({}); //Clear database
+    await Pokemon.create(pokemonData);
+    // await Pokemon.deleteMany({name: /saur/}); //This will filter out all pokemon with 'saur'. We don't really need it. Just showing what it can do
+    res.redirect('/pokemon');
+  })
 
 //index:
 app.get('/', (req, res) => {
