@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 // const { application } = require('express');
 const pokemonData = require('./utilities/pokemonData')
 
+
 //DB Connection
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once("open", () => {
@@ -34,7 +35,7 @@ app.get('/pokemon/seed', async (req, res) => {
 
 //index:
 app.get('/', (req, res) => {
-    res.send('Welcome to the Pokemon App!')
+    res.render('Homepage')
 })
 
 app.get('/pokemon', (req, res) => {
